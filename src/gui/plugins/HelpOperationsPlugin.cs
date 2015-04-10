@@ -83,10 +83,13 @@ public class HelpOperationsPlugin : GuiPlugin
 	///<summary>Handle edit->undo command from menu</summary>
 	public void OnContentsActivated(object o, EventArgs args)
 	{
-#if ENABLE_UNIX_SPECIFIC
-		string helpScript = FileResourcePath.GetDataPath("help_script.sh");
-		System.Diagnostics.Process.Start(helpScript);
-#endif
+        OperatingSystem os = Environment.OSVersion;
+        PlatformID pid = os.Platform;
+
+        if (pid == PlatformID.Unix) {
+            string helpScript = FileResourcePath.GetDataPath ("help_script.sh");
+            System.Diagnostics.Process.Start (helpScript);
+        }
 	}
 
 	///<summary>Handle edit->redo command from menu</summary>

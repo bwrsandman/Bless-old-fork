@@ -123,37 +123,38 @@ public class FileBuffer: BaseBuffer
 	{
 		if (reader != null)
 			reader.Close();
-		
-#if ENABLE_UNIX_SPECIFIC
-		UnixFileInfo fsInfo = new UnixFileInfo(filename);
-		if (!fsInfo.Exists)
-			throw new FileNotFoundException(fsInfo.FullName);
-		
-		// get the size of the file or device
-		if (fsInfo.IsRegularFile) {
-			FileLength = fsInfo.Length;
-			isResizable = true;
-		}
-		else if (fsInfo.IsBlockDevice) {
-			UnixStream unixStream = fsInfo.OpenRead();
-			ioctl(unixStream.Handle, BLKGETSIZE64, ref FileLength);
-			unixStream.Close();
-			isResizable = false;
-		}
-		else
-			throw new NotSupportedException("File object isn't a regular or block device.");
-#endif
+
+        OperatingSystem os = Environment.OSVersion;
+        PlatformID pid = os.Platform;
+
+        if (pid == PlatformID.Unix) {
+            UnixFileInfo fsInfo = new UnixFileInfo (filename);
+            if (!fsInfo.Exists)
+                throw new FileNotFoundException (fsInfo.FullName);
+
+            // get the size of the file or device
+            if (fsInfo.IsRegularFile) {
+                FileLength = fsInfo.Length;
+                isResizable = true;
+            } else if (fsInfo.IsBlockDevice) {
+                UnixStream unixStream = fsInfo.OpenRead ();
+                ioctl (unixStream.Handle, BLKGETSIZE64, ref FileLength);
+                unixStream.Close ();
+                isResizable = false;
+            } else
+                throw new NotSupportedException ("File object isn't a regular or block device.");
+        }
 
 		Stream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
 		
 		if (stream.CanSeek == false)
 			throw new NotSupportedException("File object doesn't support seeking.");
 		
-#if !ENABLE_UNIX_SPECIFIC
-		FileLength = stream.Seek(0, SeekOrigin.End);
-		stream.Seek(0, SeekOrigin.Begin);
-		isResizable = false;
-#endif
+        if (pid != PlatformID.Unix) {
+            FileLength = stream.Seek (0, SeekOrigin.End);
+            stream.Seek (0, SeekOrigin.Begin);
+            isResizable = false;
+        }
 		reader = new BinaryReader(stream);
 		
 		winOccupied = reader.Read(window, 0, window.Length);

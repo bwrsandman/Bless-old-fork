@@ -25,28 +25,34 @@ public class Portable
 {
 	public static long GetAvailableMemory()
 	{
-#if ENABLE_UNIX_SPECIFIC
-		long availPages = Syscall.sysconf(SysconfName._SC_AVPHYS_PAGES);
-		long pageSize = Syscall.sysconf(SysconfName._SC_PAGESIZE);
-		long freeMem = availPages * pageSize;
+        OperatingSystem os = Environment.OSVersion;
+        PlatformID pid = os.Platform;
+
+        if (pid == PlatformID.Unix) {
+            long availPages = Syscall.sysconf (SysconfName._SC_AVPHYS_PAGES);
+            long pageSize = Syscall.sysconf (SysconfName._SC_PAGESIZE);
+            long freeMem = availPages * pageSize;
 			
-		return freeMem;
-#else
-		throw new NotImplementedException();
-#endif
+            return freeMem;
+        } else {
+            throw new NotImplementedException ();
+        }
 	}
 
 	public static long GetAvailableDiskSpace(string path)
 	{
-#if ENABLE_UNIX_SPECIFIC
-		// get info about the device the file will be saved on
-		Mono.Unix.Native.Statvfs stat = new Mono.Unix.Native.Statvfs();
-		Mono.Unix.Native.Syscall.statvfs(path, out stat);
-		long freeSpace = (long)(stat.f_bavail * stat.f_bsize);
+        OperatingSystem os = Environment.OSVersion;
+        PlatformID pid = os.Platform;
+
+        if (pid == PlatformID.Unix) {
+            // get info about the device the file will be saved on
+            Mono.Unix.Native.Statvfs stat = new Mono.Unix.Native.Statvfs ();
+            Mono.Unix.Native.Syscall.statvfs (path, out stat);
+            long freeSpace = (long)(stat.f_bavail * stat.f_bsize);
 			
-		return freeSpace;
-#else
-		throw new NotImplementedException();
-#endif
+            return freeSpace;
+        } else {
+            throw new NotImplementedException ();
+        }
 	}
 }
