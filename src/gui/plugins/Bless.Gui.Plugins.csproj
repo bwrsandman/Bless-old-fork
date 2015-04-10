@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{240472B8-F09A-4DBA-8484-8FE2A40BA9D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bless.Gui.Plugins</RootNamespace>
+    <AssemblyName>Bless.Gui.Plugins</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="BitwiseOperationsPlugin.cs" />
+    <Compile Include="ConversionTablePlugin.cs" />
+    <Compile Include="EditOperationsPlugin.cs" />
+    <Compile Include="FileExportPlugin.cs" />
+    <Compile Include="FileOperationsPlugin.cs" />
+    <Compile Include="FindReplacePlugin.cs" />
+    <Compile Include="GotoOffsetPlugin.cs" />
+    <Compile Include="HelpOperationsPlugin.cs" />
+    <Compile Include="HistoryPlugin.cs" />
+    <Compile Include="InfobarPlugin.cs" />
+    <Compile Include="PatternMatchHighlightPlugin.cs" />
+    <Compile Include="ProgressDisplayPlugin.cs" />
+    <Compile Include="SelectLayoutPlugin.cs" />
+    <Compile Include="SelectRangePlugin.cs" />
+    <Compile Include="StatisticsPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\plugins\Bless.Plugins.csproj">
+      <Project>{E2DC4908-0E8E-4DBD-84BF-F26B7759FE19}</Project>
+      <Name>Bless.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\buffers\Bless.Buffers.csproj">
+      <Project>{7CE9ACCE-AF93-4FBD-90E7-ABE27AC488AC}</Project>
+      <Name>Bless.Buffers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bless.Gui.csproj">
+      <Project>{3B2C5B80-117F-4F4A-9E5F-11F468E7CEBA}</Project>
+      <Name>Bless.Gui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tools\Bless.Tools.csproj">
+      <Project>{CBE17FF1-E496-4A78-9448-8405A8086BEB}</Project>
+      <Name>Bless.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tools\find\Bless.Tools.Find.csproj">
+      <Project>{FF53B80A-AE2B-47F3-9DC8-2F28EB1285DB}</Project>
+      <Name>Bless.Tools.Find</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\areas\Bless.Gui.Areas.csproj">
+      <Project>{C143B6F4-DD74-42D8-8565-F4371CF6EBD1}</Project>
+      <Name>Bless.Gui.Areas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\drawers\Bless.Gui.Drawers.csproj">
+      <Project>{4E7FBA29-94C1-4C4D-AB09-2B4B389F1DE4}</Project>
+      <Name>Bless.Gui.Drawers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\util\Bless.Util.csproj">
+      <Project>{EABF1C55-CAF7-4FEA-8647-C3DD271672E2}</Project>
+      <Name>Bless.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{3B2C5B80-117F-4F4A-9E5F-11F468E7CEBA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bless.Gui</RootNamespace>
+    <AssemblyName>Bless.Gui</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="DataBook.cs" />
+    <Compile Include="DataBookFinder.cs" />
+    <Compile Include="DataView.cs" />
+    <Compile Include="DataViewControl.cs" />
+    <Compile Include="DataViewDisplay.cs" />
+    <Compile Include="FileChangedBar.cs" />
+    <Compile Include="FileService.cs" />
+    <Compile Include="Layout.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="Services.cs" />
+    <Compile Include="SessionService.cs" />
+    <Compile Include="UIService.cs" />
+    <Compile Include="WidgetGroup.cs" />
+    <Compile Include="dialogs\AboutDialog.cs" />
+    <Compile Include="dialogs\Alert.cs" />
+    <Compile Include="dialogs\ErrorAlert.cs" />
+    <Compile Include="dialogs\ExportDialog.cs" />
+    <Compile Include="dialogs\FileOverwriteAlert.cs" />
+    <Compile Include="dialogs\InformationAlert.cs" />
+    <Compile Include="dialogs\LayoutSelectionDialog.cs" />
+    <Compile Include="dialogs\PreferencesDialog.cs" />
+    <Compile Include="dialogs\ProgressDialog.cs" />
+    <Compile Include="dialogs\RevertConfirmationAlert.cs" />
+    <Compile Include="dialogs\SaveConfirmationAlert.cs" />
+    <Compile Include="dialogs\SaveConfirmationMultiAlert.cs" />
+    <Compile Include="dialogs\WarningAlert.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="System.Xml" />
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\tools\find\Bless.Tools.Find.csproj">
+      <Project>{FF53B80A-AE2B-47F3-9DC8-2F28EB1285DB}</Project>
+      <Name>Bless.Tools.Find</Name>
+    </ProjectReference>
+    <ProjectReference Include="drawers\Bless.Gui.Drawers.csproj">
+      <Project>{4E7FBA29-94C1-4C4D-AB09-2B4B389F1DE4}</Project>
+      <Name>Bless.Gui.Drawers</Name>
+    </ProjectReference>
+    <ProjectReference Include="areas\Bless.Gui.Areas.csproj">
+      <Project>{C143B6F4-DD74-42D8-8565-F4371CF6EBD1}</Project>
+      <Name>Bless.Gui.Areas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\plugins\Bless.Plugins.csproj">
+      <Project>{E2DC4908-0E8E-4DBD-84BF-F26B7759FE19}</Project>
+      <Name>Bless.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\tools\export\Bless.Tools.Export.csproj">
+      <Project>{DD2FBB18-4920-4DBC-BF3F-4C63B3B67CB9}</Project>
+      <Name>Bless.Tools.Export</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\tools\Bless.Tools.csproj">
+      <Project>{CBE17FF1-E496-4A78-9448-8405A8086BEB}</Project>
+      <Name>Bless.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\buffers\Bless.Buffers.csproj">
+      <Project>{7CE9ACCE-AF93-4FBD-90E7-ABE27AC488AC}</Project>
+      <Name>Bless.Buffers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\util\Bless.Util.csproj">
+      <Project>{EABF1C55-CAF7-4FEA-8647-C3DD271672E2}</Project>
+      <Name>Bless.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

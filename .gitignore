@@ -1,5 +1,7 @@
 Makefile
 Makefile.in
+*.userprefs
+*.mdb
 *~
 *.dll
 *.exe
@@ -13,6 +15,7 @@ Makefile.in
 ./install-sh
 ./missing
 ./INSTALL
+obj/
 data/help_script.tmpl
 doc/user/*.html
 src/bless-script

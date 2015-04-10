@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F5605C07-3AB4-4020-9C7A-50823CFCD593}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>tests</RootNamespace>
+    <AssemblyName>tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="util\BaseConverterTests.cs" />
+    <Compile Include="util\ByteArrayTests.cs" />
+    <Compile Include="util\DequeTests.cs" />
+    <Compile Include="util\IntervalTreeTests.cs" />
+    <Compile Include="util\ListTests.cs" />
+    <Compile Include="util\RangeTests.cs" />
+    <Compile Include="util\RedBlackTreeTests.cs" />
+    <Compile Include="tools\export\ExporterTests.cs\ExporterTests.cs" />
+    <Compile Include="buffers\ByteBufferTests.cs" />
+    <Compile Include="buffers\FileBufferTests.cs" />
+    <Compile Include="buffers\SegmentCollectionTests.cs" />
+    <Compile Include="buffers\SegmentTests.cs" />
+    <Compile Include="buffers\SimpleBufferTests.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="buffers\test1.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\util\Bless.Util.csproj">
+      <Project>{EABF1C55-CAF7-4FEA-8647-C3DD271672E2}</Project>
+      <Name>Bless.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\buffers\Bless.Buffers.csproj">
+      <Project>{7CE9ACCE-AF93-4FBD-90E7-ABE27AC488AC}</Project>
+      <Name>Bless.Buffers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\tools\export\Bless.Tools.Export.csproj">
+      <Project>{DD2FBB18-4920-4DBC-BF3F-4C63B3B67CB9}</Project>
+      <Name>Bless.Tools.Export</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\tools\export\plugins\Bless.Tools.Export.Plugins.csproj">
+      <Project>{E55741E2-3762-4A2D-A057-5F8AF379E591}</Project>
+      <Name>Bless.Tools.Export.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

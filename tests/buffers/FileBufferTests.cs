@@ -30,7 +30,7 @@ public class FileBufferTests {
 
 	[Test]
 	public void LoadFile() {
-		FileBuffer fb = new FileBuffer("test1.bin");
+        FileBuffer fb = new FileBuffer("buffers/test1.bin");
 		byte[] baExpect = {0x3c, 0x13, 0xe3, 0x36, 0xcc, 0x66, 0x21, 0xda};
 		byte[] ba = new byte[baExpect.Length];
 		fb.Read(ba, 0, 0x3f0, baExpect.Length);
@@ -42,7 +42,7 @@ public class FileBufferTests {
 
 	[Test]
 	public void IndexerAccessTest() {
-		FileBuffer fb = new FileBuffer("test1.bin");
+        FileBuffer fb = new FileBuffer("buffers/test1.bin");
 		Assert.IsNotNull(fb, "#1");
 
 		long size = fb.Size;

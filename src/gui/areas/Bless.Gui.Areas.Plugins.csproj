@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{CF97AA1B-130B-44A2-9CE4-01FCBE1D554F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bless.Gui.Areas.Plugins</RootNamespace>
+    <AssemblyName>Bless.Gui.Areas.Plugins</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="AsciiArea.cs" />
+    <Compile Include="BinaryArea.cs" />
+    <Compile Include="DecimalArea.cs" />
+    <Compile Include="GroupedArea.cs" />
+    <Compile Include="HexArea.cs" />
+    <Compile Include="OctalArea.cs" />
+    <Compile Include="OffsetArea.cs" />
+    <Compile Include="SeparatorArea.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Xml" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\drawers\Bless.Gui.Drawers.csproj">
+      <Project>{4E7FBA29-94C1-4C4D-AB09-2B4B389F1DE4}</Project>
+      <Name>Bless.Gui.Drawers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\plugins\Bless.Plugins.csproj">
+      <Project>{E2DC4908-0E8E-4DBD-84BF-F26B7759FE19}</Project>
+      <Name>Bless.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\util\Bless.Util.csproj">
+      <Project>{EABF1C55-CAF7-4FEA-8647-C3DD271672E2}</Project>
+      <Name>Bless.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="Bless.Gui.Areas.csproj">
+      <Project>{C143B6F4-DD74-42D8-8565-F4371CF6EBD1}</Project>
+      <Name>Bless.Gui.Areas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\buffers\Bless.Buffers.csproj">
+      <Project>{7CE9ACCE-AF93-4FBD-90E7-ABE27AC488AC}</Project>
+      <Name>Bless.Buffers</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

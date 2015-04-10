@@ -152,7 +152,7 @@ public class ByteBufferTests {
 
 	[Test]
 	public void FileLoadTest1() {
-		ByteBuffer bb = ByteBuffer.FromFile("test1.bin");
+		ByteBuffer bb = ByteBuffer.FromFile("buffers/test1.bin");
 
 		long size = bb.Size;
 		int sum = 0;
@@ -165,7 +165,7 @@ public class ByteBufferTests {
 
 	[Test]
 	public void FileLoadTest2() {
-		ByteBuffer bb = ByteBuffer.FromFile("test1.bin");
+		ByteBuffer bb = ByteBuffer.FromFile("buffers/test1.bin");
 		byte[] ba = {0x41, 0x61};
 		bb.Append(ba, 0, ba.LongLength);
 
@@ -180,7 +180,7 @@ public class ByteBufferTests {
 
 	[Test]
 	public void FileLoadTest3() {
-		ByteBuffer bb = ByteBuffer.FromFile("test1.bin");
+		ByteBuffer bb = ByteBuffer.FromFile("buffers/test1.bin");
 		byte[] ba = {0x41, 0x61};
 		bb.Insert(768, ba, 0, ba.LongLength);
 
@@ -196,18 +196,18 @@ public class ByteBufferTests {
 	[Test]
 	[Ignore("It fails, perhaps because it is run from nunit")]
 	public void FileSaveTest1() {
-		ByteBuffer bb = ByteBuffer.FromFile("test1.bin");
+        ByteBuffer bb = ByteBuffer.FromFile("buffers/test1.bin");
 		byte[] ba = {0x41, 0x61};
 		long size1 = bb.Size;
 
 		bb.Insert(768, ba, 0, ba.LongLength);
 		Assert.AreEqual(size1 + 2, bb.Size, "#1");
 
-		IAsyncResult ar = bb.BeginSaveAs("test2.bin", null, null);
+        IAsyncResult ar = bb.BeginSaveAs("buffers/test2.bin", null, null);
 		ar.AsyncWaitHandle.WaitOne();
 		bb.CloseFile();
 
-		ByteBuffer bb1 = ByteBuffer.FromFile("test2.bin");
+        ByteBuffer bb1 = ByteBuffer.FromFile("buffers/test2.bin");
 
 		Assert.AreEqual(bb.Size, bb1.Size, "#2");
 		long size = bb1.Size;

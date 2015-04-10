@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{EABF1C55-CAF7-4FEA-8647-C3DD271672E2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Bless.Util</RootNamespace>
+    <AssemblyName>Bless.Util</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="BaseConverter.cs" />
+    <Compile Include="ByteArray.cs" />
+    <Compile Include="Deque.cs" />
+    <Compile Include="FileResourcePath.cs" />
+    <Compile Include="IntervalTree.cs" />
+    <Compile Include="List.cs" />
+    <Compile Include="Portable.cs" />
+    <Compile Include="ProgressCallback.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="RangeCollection.cs" />
+    <Compile Include="RedBlackTree.cs" />
+    <Compile Include="TempFile.cs" />
+    <Compile Include="ThreadedAsyncOperation.cs" />
+    <Compile Include="ConfigureDefines.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Posix" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+</Project>
