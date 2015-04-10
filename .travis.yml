@@ -1,2 +1,14 @@
 language: csharp
 solution: Bless.sln
+
+install:
+  # Install dependencies of Project
+  - nuget restore Bless.sln
+  # Install NUnit test runner
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+
+script:
+  # Build but ignore CS0169: Private field never used
+  - xbuild /p:Configuration=Release /p:NoWarn=0169 Bless.sln
+  # Run unittests defined in test project
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./tests/bin/Release/tests.dll
