@@ -194,6 +194,7 @@ public class BlessMain
 		// Add area plugins
 		PluginManager.AddForType(typeof(AreaPlugin), new object[0]);
 		PluginManager areaPlugins = PluginManager.GetForType(typeof(AreaPlugin));
+		Area.InitiatePluginTable();
 		foreach (AreaPlugin p in areaPlugins.Plugins) {
 			Area.AddFactoryItem(p.Name, p.CreateArea);
 		}

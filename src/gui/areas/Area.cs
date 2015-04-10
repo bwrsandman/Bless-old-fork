@@ -179,6 +179,13 @@ public abstract class Area
 	/// A dictionary to hold area type names and creation functions
 	/// </summary>
 	static private Dictionary<string, AreaCreatorFunc> pluginTable;
+
+	static public void InitiatePluginTable()
+	{
+		if (pluginTable == null) {
+			pluginTable = new Dictionary<string, AreaCreatorFunc>();
+		}
+	}
 	
 	/// <summary>
 	/// Adds a new area type to the factory.
