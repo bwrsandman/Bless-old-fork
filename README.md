@@ -1,23 +1,23 @@
+[![Build Status](https://travis-ci.org/bwrsandman/Bless.svg?branch=master)](https://travis-ci.org/bwrsandman/Bless)
+
 Bless - Gtk# Hex Editor v0.6.0
 ==============================
 Copyright (c) 2004-2008, Alexandros Frantzis
 
 Thank you for using ( or at least trying out :) ) Bless!
 
-Contents
+### Contents
 
-1. Description
-2. Project Web Site and contact info
-3. Requirements
-4. Installation
-5. Running
-6. Documentation
-7. Known Issues
+1. [Description](#1-description)
+2. [Project Web Site and contact info](#2-project-web-site-and-contact-info)
+3. [Requirements](#3-requirements)
+4. [Installation](#4-installation)
+5. [Running](#5-running)
+6. [Documentation](#6-documentation)
+7. [Known Issues](#7-known-issues)
 
 
---------------
-1. Description
---------------
+## 1. Description
 
 Bless is a binary (hex) editor, a program that enables you to edit files as
 a sequence of bytes. It is written in C# and uses the Gtk# bindings for the 
@@ -26,8 +26,8 @@ GTK+ toolkit.
 Bless is distributed under the terms of the GNU General Public License (GPL). 
 See the file COPYING for more information.
 
-Main Features
--------------
+### Main Features
+
   * Efficient editing of large data files. 
   * Raw disk editing.
   * Multilevel undo - redo operations.
@@ -41,22 +41,20 @@ Main Features
   * Export to text and html (others with plugins).
   * Extensibility with Plugins.
   
-Planned Features
-----------------
+### Planned Features
+
   * Scripting language for binary file manipulation.
 
-------------------------------------
-2. Project Web Site and contact info
-------------------------------------
+
+## 2. Project Web Site and contact info
+
 
 More information, bug reports and the latest releases can be found at: 
   http://home.gna.org/bless
 
-I can be contacted at: alf82 [at] freemail [dot] gr.
+The original author can be contacted at: alf82 [at] freemail [dot] gr.
 
----------------
-3. Requirements
----------------
+## 3. Requirements
 
 The main target platform for bless is GNU/Linux. However, all the libraries it
 uses are cross-platform, so bless should be able to run without problems 
@@ -72,53 +70,68 @@ Development is done using the latest stable versions of the above libraries.
 Although using an older version may be OK, there is no guarantee that there 
 will not be problems.
 
----------------
-4. Installation
----------------
-Quick: 
-    untar, ./configure, make, (make install)
 
-Detailed:
+## 4. Installation
 
-Step 1: Untar the source package
----------------------------------
-For a tar.gz package use:
+```
+checkout, nuget, xbuild, install
+```
+
+### Step 1: Checkout the package or untar
+
+* For the git source:
+    ```
+    git clone https://github.com/bwrsandman/Bless.git
+    ```
+
+* For a tar.gz package use:
+    ```
     tar -xzvf bless-a.b.c.tar.gz
+    ```
 
-For a tar.bz2 package use:
+* For a tar.bz2 package use:
+    ```
     tar -xjvf bless-a.b.c.tar.gz
+    ```
 
-Step 2: Configure the build
------------------------------
-Enter the directory created in the previous step (bless-a.b.c) and type
-'./configure'. The script will check if your system has all the required
-libraries. Use the "--prefix=*" option to set the installation directory prefix.
-By default the prefix is '/usr/local'.
+### Step 2: Get dependencies
+Enter the directory created in the previous step (bless-a.b.c) and type:
+```
+nuget restore Bless.sln
+```
 
-You can also use the "--enable-debug" option to build bless with debug
-information.
+This command will download all dependencies of the project.
 
-Step 3: Build the program
------------------------------
-Type 'make'. This will create 'bless.exe' and the necessary library files in the
-bin/ directory and the 'bless' launcher script in the bless-a.b.c directory. You
-can also type 'make check' to run some tests on various bless components. 
+### Step 3: Build the program
 
-Step 4: Install the program (optional)
---------------------------------------
-Become root and type 'make install'.
+Type:
 
+```
+xbuild /p:Configuration=Release Bless.sln
+```
 
-----------
-5. Running
-----------
+This will create Bless.exe and the necessary library files in the `src/bin/`.
+
+You can also run: 
+
+```
+mono /usr/lib/mono/4.5/nunit-console.exe tests/bin/Release/tests.dll
+```
+
+This will perform some tests on various Bless components.
+
+### Step 4: Install the program (optional)
+
+TODO: Not impemented
+
+### 5. Running
+
 If you chose to install the program, just type 'bless'. In any case you can  
-run the program by typing 'bless' in the 'bless-a.b.c' directory.
+run the program by typing `mono Bless.exe` in the 'bless-a.b.c/src/bin' directory.
 Enjoy!
 
-----------------
-6. Documentation
-----------------
+
+### 6. Documentation
 
 The doc/ directory contains documentation directed both at the user and at the 
 developer who wants to explore Bless. The doc/user/ subdirectory contains 
@@ -126,9 +139,8 @@ information about using bless whereas doc/developer/ contains developer
 information (bless api etc). 
 Note: The developer documentation is almost non-existant.
 
----------------
-7. Known Issues
----------------
+
+### 7. Known Issues
 
 * To be able to save a file under the same name (File->Save command) you need
   to have (temporarily) enough disk space to hold both the original and the
@@ -138,7 +150,7 @@ Note: The developer documentation is almost non-existant.
   be saved in the same storage device as /tmp, you need to have 20+21=41MB free
   space in that storage device to be able to save it. After a successful save, 
   the original file is deleted, in this case freeing 20MB.
-      Although this can be a problem (when there is not enough disk space), it 
+  Although this can be a problem (when there is not enough disk space), it 
   can also be seen as a safety measure in case something goes wrong when saving.
 
   A notable exception to the above is when the size of the file to be saved has 
