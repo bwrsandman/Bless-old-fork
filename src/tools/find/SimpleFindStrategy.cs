@@ -30,6 +30,7 @@ class SimpleFindStrategy : IFindStrategy
 	byte[] pattern;
 	ByteBuffer buffer;
 	long pos;
+	bool cancelled;
 
 	public SimpleFindStrategy()
 	{
@@ -49,6 +50,11 @@ class SimpleFindStrategy : IFindStrategy
 	public long Position {
 		get { return pos;}
 		set { pos = value; }
+	}
+
+	public bool Cancelled {
+		get { return cancelled; }
+		set { cancelled = value;}
 	}
 
 	public Range FindNext(long limit)
