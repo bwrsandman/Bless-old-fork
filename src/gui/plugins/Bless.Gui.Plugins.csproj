@@ -46,6 +46,7 @@
     <Compile Include="SelectLayoutPlugin.cs" />
     <Compile Include="SelectRangePlugin.cs" />
     <Compile Include="StatisticsPlugin.cs" />
+    <Compile Include="FocusPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />

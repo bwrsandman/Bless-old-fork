@@ -46,6 +46,8 @@ public abstract class Drawer {
 		public Drawer.Color[,] fgNormal;
 		public Drawer.Color[,] bgNormal;
 
+		public Drawer.Color[,] fgUnfocused;
+
 		public Drawer.Color[,] fgHighlight;
 		public Drawer.Color[,] bgHighlight;
 
@@ -58,6 +60,7 @@ public abstract class Drawer {
 
 			fgNormal = new Drawer.Color[2, 2];
 			bgNormal = new Drawer.Color[2, 2];
+			fgUnfocused = new Drawer.Color[2, 2];
 			
 			fgHighlight = new Drawer.Color[2, (int)HighlightType.Sentinel];
 			bgHighlight = new Drawer.Color[2, (int)HighlightType.Sentinel];
@@ -81,6 +84,11 @@ public abstract class Drawer {
 
 			Gdk.Color.Parse("blue", ref fgNormal[(int)RowType.Odd, (int)ColumnType.Odd].GdkColor);
 			Gdk.Color.Parse("white", ref bgNormal[(int)RowType.Odd, (int)ColumnType.Odd].GdkColor);
+
+			for (int i = 0; i < 2; i++) {
+				fgUnfocused[0, i] = new Drawer.Color (MakeColorLighter (fgNormal[0, i].GdkColor, 0.7));
+				fgUnfocused[1, i] = new Drawer.Color (MakeColorLighter (fgNormal[1, i].GdkColor, 0.7));
+			}
 
 			// leave unspecified...
 			// if not specified by user they will
@@ -163,7 +171,7 @@ public abstract class Drawer {
 	// For example if a Bookmark and PatternMatch highlight are to be drawn on the same offset
 	// the PatternMatch type will be drawn. In the same manner the Selection highlight
 	// is always drawn, whereas the Normal highlight is always drawn over.
-	public enum HighlightType { Normal, Bookmark, PatternMatch, Selection, Sentinel }
+	public enum HighlightType { Normal, Bookmark, Unfocus, PatternMatch, Selection, Sentinel }
 	public enum RowType { Even, Odd }
 	public enum ColumnType { Even, Odd }
 
@@ -238,6 +246,10 @@ public abstract class Drawer {
 		colorBg = info.bgHighlight[(int)RowType.Even, (int)HighlightType.PatternMatch];
 		pixmapsHighlight[(int)RowType.Even, (int)HighlightType.PatternMatch] = CreateWrapper(colorFg, colorBg);
 
+		colorFg = info.fgUnfocused[(int)RowType.Even, (int)ColumnType.Even];
+		colorBg = info.bgNormal[(int)RowType.Even, (int)ColumnType.Even];
+		pixmapsHighlight[(int)RowType.Even, (int)HighlightType.Unfocus] = CreateWrapper(colorFg, colorBg);
+
 
 		//odd rows
 		colorFg = info.fgNormal[(int)RowType.Odd, (int)ColumnType.Even];
@@ -255,6 +267,10 @@ public abstract class Drawer {
 		colorFg = info.fgHighlight[(int)RowType.Odd, (int)HighlightType.PatternMatch];
 		colorBg = info.bgHighlight[(int)RowType.Odd, (int)HighlightType.PatternMatch];
 		pixmapsHighlight[(int)RowType.Odd, (int)HighlightType.PatternMatch] = CreateWrapper(colorFg, colorBg);
+
+		colorFg = info.fgUnfocused[(int)RowType.Odd, (int)ColumnType.Even];
+		colorBg = info.bgNormal[(int)RowType.Odd, (int)ColumnType.Even];
+		pixmapsHighlight[(int)RowType.Odd, (int)HighlightType.Unfocus] = CreateWrapper(colorFg, colorBg);
 	}
 
 	void InitializeBackgroundGCs()
@@ -288,6 +304,13 @@ public abstract class Drawer {
 
 		col = info.bgHighlight[(int)RowType.Odd, (int)HighlightType.PatternMatch];
 		backGC[(int)RowType.Odd, (int)HighlightType.PatternMatch].RgbFgColor = col.GdkColor;
+
+		// unfocus
+		col = info.bgNormal[(int)RowType.Even, (int)ColumnType.Even];
+		backGC[(int)RowType.Even, (int)HighlightType.Unfocus].RgbFgColor = col.GdkColor;
+
+		col = info.bgNormal[(int)RowType.Odd, (int)ColumnType.Even];
+		backGC[(int)RowType.Odd, (int)HighlightType.Unfocus].RgbFgColor = col.GdkColor;
 	}
 
 	///<summary>

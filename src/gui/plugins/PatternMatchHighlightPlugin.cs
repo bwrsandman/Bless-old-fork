@@ -77,8 +77,8 @@ public class PatternMatchHighlightPlugin : GuiPlugin
 class PatternHighlighter
 {
 	DataBook dataBook;
-	bool active;
-	IFindStrategy findStrategy;
+	protected bool active;
+	protected IFindStrategy findStrategy;
 	
 	public bool Active {
 		get { return active; }
@@ -119,7 +119,7 @@ class PatternHighlighter
 	/// <summary>
 	/// Adds pattern match highlights to an area group before it is rendered
 	/// </summary>
-	void BeforeRender(AreaGroup ag)
+	protected virtual void BeforeRender(AreaGroup ag)
 	{
 		if (!active)
 			return;
