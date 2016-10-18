@@ -132,6 +132,8 @@ public class Preferences
 		xml.Indentation = 1;
 		xml.IndentChar = '\t';
 
+		xml.WriteStartDocument(); // add xml document root (xml version)
+		
 		xml.WriteStartElement(null, "preferences", null);
 
 		foreach (DictionaryEntry entry in prefs) {
