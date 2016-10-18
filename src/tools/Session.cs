@@ -77,6 +77,8 @@ public class Session
 		xml.Indentation = 1;
 		xml.IndentChar = '\t';
 
+		xml.WriteStartDocument (); // add xml document version
+		
 		xml.WriteStartElement(null, "session", null);
 
 		xml.WriteStartElement(null, "windowheight", null);
