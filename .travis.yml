@@ -1,14 +1,26 @@
 language: csharp
 solution: Bless.sln
 
+before_install:
+  - sudo apt-get install gtk-sharp2
+
 install:
   # Install dependencies of Project
   - nuget restore Bless.sln
-  # Install NUnit test runner
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  # Setup mono-cov for Coverage
+  - curl -sS https://api.nuget.org/packages/mono.cecil.0.9.5.4.nupkg > /tmp/mono.cecil.0.9.5.4.nupkg.zip && unzip /tmp/mono.cecil.0.9.5.4.nupkg.zip -d /tmp/cecil && rm -f /tmp/mono.cecil.0.9.5.4.nupkg.zip
+  - git clone --depth=50 git://github.com/csMACnz/monocov.git ../../csMACnz/monocov
+  - pushd ../../csMACnz/monocov && cp /tmp/cecil/lib/net40/Mono.Cecil.dll . && ./configure && make && sudo make install && popd
 
 script:
   # Build but ignore CS0169: Private field never used
   - xbuild /p:Configuration=Release /p:NoWarn=0169 Bless.sln
   # Run unittests defined in test project
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./tests/bin/Release/tests.dll
+  - export LD_LIBRARY_PATH=/usr/local/lib
+  - mono --debug --profile=monocov:outfile=monocovCoverage.cov,+[Bless] ./packages/NUnit.Console.3.0.0-alpha-5b/tools/nunit-console.exe ./tests/bin/Release/tests.dll
+
+after_success:
+  - monocov --export-xml=monocovCoverage monocovCoverage.cov
+  - cat monocovCoverage.cov
+  - ls monocovCoverage
+  - mono ./packages/coveralls.net.0.5.0/csmacnz.Coveralls.exe --monocov -i ./monocovCoverage --repoToken bilidwpSCuFp7CC1zxwEN3hfpTAq0DQ82 --commitId $TRAVIS_COMMIT --commitBranch $TRAVIS_BRANCH --commitAuthor "$(git show -s --pretty=format:'%cn')" --commitEmail "$(git show -s --pretty=format:'%ce')" --commitMessage "$(git show -s --pretty=format:'%s')" --jobId $TRAVIS_JOB_ID  --serviceName travis-ci  --useRelativePaths
